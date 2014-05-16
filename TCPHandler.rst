@@ -1,7 +1,7 @@
 TCPHandler Objects
 ******************
 
-In **tcpy**, commands are associated to handlers. A client can ask the server to execute a command, and the server will know which handler has the responsibility of carrying out that command. The ``TCPHandler`` class is the base building block for implementing handlers, which compose a ``TCPServer``'s functionality.
+In **tcpy**, commands are associated to handlers. A client can ask the server to execute a command, and the server will invoke the handler whose responsibility is to carry out that command. The ``TCPHandler`` class is the base building block for implementing handlers, which compose a ``TCPServer``'s functionality.
 
 All **tcpy** handlers should inherit from this class and define their behavior in an ``execute()`` method.
 
@@ -13,7 +13,7 @@ __init__(**params)
 All parameters passed by a client with a request will be forwarded into the appropriate handler's ``__init__()`` method.  They should be captured here as members of the handler class.
 
 .. note::
-   In many cases a client's connection to the server will need to be maintained to communicate back and forth. Calling `super(MyHandler, self).__init__()` when initializing a handler will give the handler access to the connection to the client.
+   In many cases a client's connection to the server will need to be maintained to communicate back and forth. Calling ``super(MyHandler, self).__init__()`` when initializing a handler will give the handler access to the connection to the client.
 
 execute()
 ---------
@@ -50,7 +50,7 @@ send(data)
 Sends the given ``data`` (in dictionary form) to a client without closing the connection.
 
 .. note::
-   A handler must call it's parent's ``__init__()`` method in order to use the connection.
+   A handler must call its parent's ``__init__()`` method in order to use the connection.
 
 recv()
 ----------
@@ -58,4 +58,4 @@ recv()
 Receives data from a connected client and returns it in dictionary form.
 
 .. note::
-   A handler must call it's parent's ``__init__()`` method in order to use the connection.
+   A handler must call its parent's ``__init__()`` method in order to use the connection.

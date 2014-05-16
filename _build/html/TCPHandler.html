@@ -51,7 +51,7 @@
             
   <div class="section" id="tcphandler-objects">
 <h1>TCPHandler Objects<a class="headerlink" href="#tcphandler-objects" title="Permalink to this headline">¶</a></h1>
-<p>In <strong>tcpy</strong>, commands are associated to handlers. A client can ask the server to execute a command, and the server will know which handler has the responsibility of carrying out that command. The <tt class="docutils literal"><span class="pre">TCPHandler</span></tt> class is the base building block for implementing handlers, which compose a <tt class="docutils literal"><span class="pre">TCPServer</span></tt>&#8216;s functionality.</p>
+<p>In <strong>tcpy</strong>, commands are associated to handlers. A client can ask the server to execute a command, and the server will invoke the handler whose responsibility is to carry out that command. The <tt class="docutils literal"><span class="pre">TCPHandler</span></tt> class is the base building block for implementing handlers, which compose a <tt class="docutils literal"><span class="pre">TCPServer</span></tt>&#8216;s functionality.</p>
 <p>All <strong>tcpy</strong> handlers should inherit from this class and define their behavior in an <tt class="docutils literal"><span class="pre">execute()</span></tt> method.</p>
 <p>Associating a string command to a handler class within the <tt class="docutils literal"><span class="pre">TCPServer</span></tt>&#8216;s <tt class="docutils literal"><span class="pre">command</span></tt> dictionary will give the server the ability to execute the handler.</p>
 <div class="section" id="init-params">
@@ -59,7 +59,7 @@
 <p>All parameters passed by a client with a request will be forwarded into the appropriate handler&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method.  They should be captured here as members of the handler class.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In many cases a client&#8217;s connection to the server will need to be maintained to communicate back and forth. Calling <cite>super(MyHandler, self).__init__()</cite> when initializing a handler will give the handler access to the connection to the client.</p>
+<p class="last">In many cases a client&#8217;s connection to the server will need to be maintained to communicate back and forth. Calling <tt class="docutils literal"><span class="pre">super(MyHandler,</span> <span class="pre">self).__init__()</span></tt> when initializing a handler will give the handler access to the connection to the client.</p>
 </div>
 </div>
 <div class="section" id="execute">
@@ -96,7 +96,7 @@
 <p>Sends the given <tt class="docutils literal"><span class="pre">data</span></tt> (in dictionary form) to a client without closing the connection.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">A handler must call it&#8217;s parent&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method in order to use the connection.</p>
+<p class="last">A handler must call its parent&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method in order to use the connection.</p>
 </div>
 </div>
 <div class="section" id="recv">
@@ -104,7 +104,7 @@
 <p>Receives data from a connected client and returns it in dictionary form.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">A handler must call it&#8217;s parent&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method in order to use the connection.</p>
+<p class="last">A handler must call its parent&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method in order to use the connection.</p>
 </div>
 </div>
 </div>

@@ -47,6 +47,46 @@
             
   <div class="section" id="tcpclient-objects">
 <h1>TCPClient Objects<a class="headerlink" href="#tcpclient-objects" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">TCPClient</span></tt> class provides a concise interface for connecting and speaking to a <tt class="docutils literal"><span class="pre">TCPServer</span></tt> instance.</p>
+<div class="section" id="tcpclient-host-port">
+<h2>TCPClient([host, port])<a class="headerlink" href="#tcpclient-host-port" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Instantiates a <tt class="docutils literal"><span class="pre">TCPClient</span></tt> object.</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">host</span></tt>: The host the target server is listening on.  Defaults to localhost.</li>
+<li><tt class="docutils literal"><span class="pre">port</span></tt>: The port the target server is listening on.  Defaults to 7272.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="connect">
+<h2>connect()<a class="headerlink" href="#connect" title="Permalink to this headline">¶</a></h2>
+<p>Connects to the server.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Available in v0.0.5 or higher.  For prior versions, use <tt class="docutils literal"><span class="pre">self.conn.connect()</span></tt></p>
+</div>
+</div>
+<div class="section" id="send-data">
+<h2>send(data)<a class="headerlink" href="#send-data" title="Permalink to this headline">¶</a></h2>
+<p>Sends the given data to the server.</p>
+</div>
+<div class="section" id="recv">
+<h2>recv()<a class="headerlink" href="#recv" title="Permalink to this headline">¶</a></h2>
+<p>Receives data from the server and returns them.</p>
+</div>
+<div class="section" id="disconnect">
+<h2>disconnect()<a class="headerlink" href="#disconnect" title="Permalink to this headline">¶</a></h2>
+<p>Closes a connection to the server.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Available in v0.0.5 or higher.  For prior versions, use <tt class="docutils literal"><span class="pre">self.conn.finish()</span></tt></p>
+</div>
+</div>
+<div class="section" id="execute-cmd-params">
+<h2>execute(cmd[, <a href="#id1"><span class="problematic" id="id2">**</span></a>params])<a class="headerlink" href="#execute-cmd-params" title="Permalink to this headline">¶</a></h2>
+<p>Calls the server to execute the given command and returns the result.</p>
+</div>
 </div>
 
 
@@ -55,6 +95,19 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TCPClient Objects</a><ul>
+<li><a class="reference internal" href="#tcpclient-host-port">TCPClient([host, port])</a></li>
+<li><a class="reference internal" href="#connect">connect()</a></li>
+<li><a class="reference internal" href="#send-data">send(data)</a></li>
+<li><a class="reference internal" href="#recv">recv()</a></li>
+<li><a class="reference internal" href="#disconnect">disconnect()</a></li>
+<li><a class="reference internal" href="#execute-cmd-params">execute(cmd[, **params])</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="TCPHandler.html"
                         title="previous chapter">TCPHandler Objects</a></p>
