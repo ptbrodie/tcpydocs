@@ -3,7 +3,7 @@ Overview
 
 **tcpy** is a lightweight framework for asynchronous TCP Servers and associated clients.
 
-Read, star, or contribute to the 'source code on Github <https://github.com/pbrodie/tcpy/>'_
+Read, star, or contribute to the `source code on Github <https://github.com/pbrodie/tcpy/>`_
 
 Installation
 ------------
@@ -12,7 +12,7 @@ Installation
 
     pip install tcpy
 
-Alternatively, you can download a tarball of the source 'here <https://pypi.python.org/pypi/tcpy/>'.
+Alternatively, you can download a tarball of the source `here <https://pypi.python.org/pypi/tcpy/>`_.
 
 .. note::
    **tcpy** versions do not yet exist for Python 3 or for Windows.
