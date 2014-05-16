@@ -51,6 +51,42 @@
             
   <div class="section" id="tcpy-tutorial">
 <h1>TCPY Tutorial<a class="headerlink" href="#tcpy-tutorial" title="Permalink to this headline">¶</a></h1>
+<p><strong>tcpy</strong> makes it extremely simple to make TCP Servers and associated clients in Python.</p>
+<p>Associate a command to a TCPHandler, define its execute() method and tcpy has you up and running:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Server</span>
+<span class="kn">from</span> <span class="nn">tcpy</span> <span class="kn">import</span> <span class="n">TCPServer</span><span class="p">,</span> <span class="n">TCPHandler</span>
+
+<span class="c"># Our handler class must inherit from TCPHandler</span>
+<span class="k">class</span> <span class="nc">AdditionHandler</span><span class="p">(</span><span class="n">TCPHandler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c"># Capture parameters as members of the class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># success() will provide a well-formed success response</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">solution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c"># Instantiate the server at default localhost:7272</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">TCPServer</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c"># Associate a command to our handler</span>
+    <span class="s">&#39;add&#39;</span><span class="p">:</span> <span class="n">AdditionHandler</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c"># Start listening for requests!</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>On the client side, just execute() one of the server&#8217;s commands:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Client</span>
+<span class="kn">from</span> <span class="nn">tcpy</span> <span class="kn">import</span> <span class="n">TCPClient</span>
+
+<span class="k">print</span> <span class="n">TCPClient</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="s">&quot;add&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Which outputs: <tt class="docutils literal"><span class="pre">{'solution':</span> <span class="pre">3,</span> <span class="pre">'success':</span> <span class="pre">True}</span></tt>.</p>
 </div>
 
 

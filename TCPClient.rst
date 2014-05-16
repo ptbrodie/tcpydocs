@@ -26,7 +26,7 @@ Sends the given data to the server.
 recv()
 ------
 
-Receives data from the server and returns them.
+Receives data from the server and returns it.
 
 disconnect()
 ------------
