@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TCPServer Objects &mdash; tcpy 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="tcpy 0.0.1 documentation" href="index.html" />
+    <link rel="next" title="TCPHandler Objects" href="TCPHandler.html" />
+    <link rel="prev" title="TCPY Tutorial" href="Tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="TCPHandler.html" title="TCPHandler Objects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Tutorial.html" title="TCPY Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">tcpy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tcpserver-objects">
+<h1>TCPServer Objects<a class="headerlink" href="#tcpserver-objects" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">TCPServer</span></tt> class handles accepting requests and queuing tasks for worker threads to complete.</p>
+<div class="section" id="tcpserver-host-port-commands-threads-poll-intv">
+<h2><tt class="docutils literal"><span class="pre">TCPServer([host,</span> <span class="pre">port,</span> <span class="pre">commands,</span> <span class="pre">threads,</span> <span class="pre">poll_intv])</span></tt><a class="headerlink" href="#tcpserver-host-port-commands-threads-poll-intv" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>Initializes an instance of the <tt class="docutils literal"><span class="pre">TCPServer</span></tt> class.</dt>
+<dd>-<tt class="docutils literal"><span class="pre">host</span></tt>: the hostname where the server will live. Defaults to locahost.
+-<tt class="docutils literal"><span class="pre">port</span></tt>: the port on which the server will listen. Defaults to 7272.
+-<tt class="docutils literal"><span class="pre">commands</span></tt>: dictionary mapping command strings to handler classes.
+-<tt class="docutils literal"><span class="pre">threads</span></tt>: number of worker threads the server will spawn to execute tasks. Defaults to 4.
+-<tt class="docutils literal"><span class="pre">poll_intv</span></tt>: the period of time a worker will sleep before polling the request queue for work.</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="listen">
+<h2><tt class="docutils literal"><span class="pre">listen()</span></tt><a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Tells a <tt class="docutils literal"><span class="pre">TCPServer</span></tt> object to begin listening for requests. TCPY will log the host and port where it is listening to stdout.</div></blockquote>
+</div>
+<div class="section" id="the-tcpserver-commands-dictionary">
+<h2>The TCPServer.commands Dictionary<a class="headerlink" href="#the-tcpserver-commands-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">commands</span></tt> dictionary of a <tt class="docutils literal"><span class="pre">TCPServer</span></tt> object is how the server knows which commands to execute.  It maps command names (strings) to handler classes.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">tcpy</span> <span class="kn">import</span> <span class="n">TCPServer</span>
+<span class="kn">from</span> <span class="nn">foo</span> <span class="kn">import</span> <span class="n">FooHandler</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">TCPServer</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="n">FooHandler</span>    <span class="c"># maps the command &#39;foo&#39; onto the FooHandler class</span>
+<span class="p">}</span>
+<span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Defining commands this way allows clients to execute specific commands similar to a remote procedure call. A <tt class="docutils literal"><span class="pre">TCPClient</span></tt> may call <tt class="docutils literal"><span class="pre">execute</span></tt> on a given command, and the <tt class="docutils literal"><span class="pre">TCPServer</span></tt> will instantiate the appropriate handler class to serve the client&#8217;s request.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TCPServer Objects</a><ul>
+<li><a class="reference internal" href="#tcpserver-host-port-commands-threads-poll-intv"><tt class="docutils literal"><span class="pre">TCPServer([host,</span> <span class="pre">port,</span> <span class="pre">commands,</span> <span class="pre">threads,</span> <span class="pre">poll_intv])</span></tt></a></li>
+<li><a class="reference internal" href="#listen"><tt class="docutils literal"><span class="pre">listen()</span></tt></a></li>
+<li><a class="reference internal" href="#the-tcpserver-commands-dictionary">The TCPServer.commands Dictionary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Tutorial.html"
+                        title="previous chapter">TCPY Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="TCPHandler.html"
+                        title="next chapter">TCPHandler Objects</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/TCPServer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="TCPHandler.html" title="TCPHandler Objects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Tutorial.html" title="TCPY Tutorial"
+             >previous</a> |</li>
+        <li><a href="index.html">tcpy 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Patrick Brodie.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
