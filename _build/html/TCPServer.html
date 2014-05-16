@@ -53,20 +53,23 @@
 <h1>TCPServer Objects<a class="headerlink" href="#tcpserver-objects" title="Permalink to this headline">¶</a></h1>
 <p>The <tt class="docutils literal"><span class="pre">TCPServer</span></tt> class handles accepting requests and queuing tasks for worker threads to complete.</p>
 <div class="section" id="tcpserver-host-port-commands-threads-poll-intv">
-<h2><tt class="docutils literal"><span class="pre">TCPServer([host,</span> <span class="pre">port,</span> <span class="pre">commands,</span> <span class="pre">threads,</span> <span class="pre">poll_intv])</span></tt><a class="headerlink" href="#tcpserver-host-port-commands-threads-poll-intv" title="Permalink to this headline">¶</a></h2>
+<h2>TCPServer([host, port, commands, threads, poll_intv])<a class="headerlink" href="#tcpserver-host-port-commands-threads-poll-intv" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="docutils">
 <dt>Initializes an instance of the <tt class="docutils literal"><span class="pre">TCPServer</span></tt> class.</dt>
-<dd>-<tt class="docutils literal"><span class="pre">host</span></tt>: the hostname where the server will live. Defaults to locahost.
--<tt class="docutils literal"><span class="pre">port</span></tt>: the port on which the server will listen. Defaults to 7272.
--<tt class="docutils literal"><span class="pre">commands</span></tt>: dictionary mapping command strings to handler classes.
--<tt class="docutils literal"><span class="pre">threads</span></tt>: number of worker threads the server will spawn to execute tasks. Defaults to 4.
--<tt class="docutils literal"><span class="pre">poll_intv</span></tt>: the period of time a worker will sleep before polling the request queue for work.</dd>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">host</span></tt>: the hostname where the server will live. Defaults to locahost.</li>
+<li><tt class="docutils literal"><span class="pre">port</span></tt>: the port on which the server will listen. Defaults to 7272.</li>
+<li><tt class="docutils literal"><span class="pre">commands</span></tt>: dictionary mapping command strings to handler classes.</li>
+<li><tt class="docutils literal"><span class="pre">threads</span></tt>: number of worker threads the server will spawn to execute tasks. Defaults to 4.</li>
+<li><tt class="docutils literal"><span class="pre">poll_intv</span></tt>: the period of time a worker will sleep before polling the request queue for work.</li>
+</ul>
+</dd>
 </dl>
 </div></blockquote>
 </div>
 <div class="section" id="listen">
-<h2><tt class="docutils literal"><span class="pre">listen()</span></tt><a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h2>
+<h2>listen()<a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div>Tells a <tt class="docutils literal"><span class="pre">TCPServer</span></tt> object to begin listening for requests. TCPY will log the host and port where it is listening to stdout.</div></blockquote>
 </div>
@@ -97,8 +100,8 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">TCPServer Objects</a><ul>
-<li><a class="reference internal" href="#tcpserver-host-port-commands-threads-poll-intv"><tt class="docutils literal"><span class="pre">TCPServer([host,</span> <span class="pre">port,</span> <span class="pre">commands,</span> <span class="pre">threads,</span> <span class="pre">poll_intv])</span></tt></a></li>
-<li><a class="reference internal" href="#listen"><tt class="docutils literal"><span class="pre">listen()</span></tt></a></li>
+<li><a class="reference internal" href="#tcpserver-host-port-commands-threads-poll-intv">TCPServer([host, port, commands, threads, poll_intv])</a></li>
+<li><a class="reference internal" href="#listen">listen()</a></li>
 <li><a class="reference internal" href="#the-tcpserver-commands-dictionary">The TCPServer.commands Dictionary</a></li>
 </ul>
 </li>

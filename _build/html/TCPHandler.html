@@ -51,6 +51,62 @@
             
   <div class="section" id="tcphandler-objects">
 <h1>TCPHandler Objects<a class="headerlink" href="#tcphandler-objects" title="Permalink to this headline">¶</a></h1>
+<p>In <strong>tcpy</strong>, commands are associated to handlers. A client can ask the server to execute a command, and the server will know which handler has the responsibility of carrying out that command. The <tt class="docutils literal"><span class="pre">TCPHandler</span></tt> class is the base building block for implementing handlers, which compose a <tt class="docutils literal"><span class="pre">TCPServer</span></tt>&#8216;s functionality.</p>
+<p>All <strong>tcpy</strong> handlers should inherit from this class and define their behavior in an <tt class="docutils literal"><span class="pre">execute()</span></tt> method.</p>
+<p>Associating a string command to a handler class within the <tt class="docutils literal"><span class="pre">TCPServer</span></tt>&#8216;s <tt class="docutils literal"><span class="pre">command</span></tt> dictionary will give the server the ability to execute the handler.</p>
+<div class="section" id="init-params">
+<h2>__init__(<a href="#id1"><span class="problematic" id="id2">**</span></a>params)<a class="headerlink" href="#init-params" title="Permalink to this headline">¶</a></h2>
+<p>All parameters passed by a client with a request will be forwarded into the appropriate handler&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method.  They should be captured here as members of the handler class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In many cases a client&#8217;s connection to the server will need to be maintained to communicate back and forth. Calling <cite>super(MyHandler, self).__init__()</cite> when initializing a handler will give the handler access to the connection to the client.</p>
+</div>
+</div>
+<div class="section" id="execute">
+<h2>execute()<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h2>
+<p>Defines the behavior of a given handler. Called on a worker thread when the command associated with a given handler is requested by a client.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Must be implemented by subclasses of the <tt class="docutils literal"><span class="pre">TCPHandler</span></tt> class.</p>
+</div>
+</div>
+<div class="section" id="success-kwargs">
+<h2>success([<a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs])<a class="headerlink" href="#success-kwargs" title="Permalink to this headline">¶</a></h2>
+<p>Provides a wrapper for well-formed success responses. Returns a dictionary of the form:</p>
+<div class="highlight-python"><div class="highlight"><pre>{
+    &#39;success&#39;: True,
+    ...      # kwargs
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-message-kwargs">
+<h2>error(message[, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs])<a class="headerlink" href="#error-message-kwargs" title="Permalink to this headline">¶</a></h2>
+<p>Provides a wrapper for well-formed error responses. Returns a dictionary of the form:</p>
+<div class="highlight-python"><div class="highlight"><pre>{
+    &#39;error&#39;: True,
+    &#39;message&#39;: message,
+    ...    # kwargs
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="send-data">
+<h2>send(data)<a class="headerlink" href="#send-data" title="Permalink to this headline">¶</a></h2>
+<p>Sends the given <tt class="docutils literal"><span class="pre">data</span></tt> (in dictionary form) to a client without closing the connection.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A handler must call it&#8217;s parent&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method in order to use the connection.</p>
+</div>
+</div>
+<div class="section" id="recv">
+<h2>recv()<a class="headerlink" href="#recv" title="Permalink to this headline">¶</a></h2>
+<p>Receives data from a connected client and returns it in dictionary form.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A handler must call it&#8217;s parent&#8217;s <tt class="docutils literal"><span class="pre">__init__()</span></tt> method in order to use the connection.</p>
+</div>
+</div>
 </div>
 
 
@@ -59,6 +115,19 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TCPHandler Objects</a><ul>
+<li><a class="reference internal" href="#init-params">__init__(**params)</a></li>
+<li><a class="reference internal" href="#execute">execute()</a></li>
+<li><a class="reference internal" href="#success-kwargs">success([**kwargs])</a></li>
+<li><a class="reference internal" href="#error-message-kwargs">error(message[, **kwargs])</a></li>
+<li><a class="reference internal" href="#send-data">send(data)</a></li>
+<li><a class="reference internal" href="#recv">recv()</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="TCPServer.html"
                         title="previous chapter">TCPServer Objects</a></p>
